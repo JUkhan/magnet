@@ -1,6 +1,6 @@
-import { createEffect } from '../src';
+import { store } from './store';
 import { increment } from './counterState';
 
-createEffect(increment, (action, getState, dispatch) => {
+store.createEffect(increment, (action, getState, dispatch) => {
   console.log(dispatch, getState(), action, '--------');
 });

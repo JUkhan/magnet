@@ -1,6 +1,7 @@
-import { createReducer, PayloadAction, on, Data } from '../src';
+import { PayloadAction, Data } from '../src';
+import { store } from './store';
 
-export const counterState = createReducer({
+export const counterState = store.createReducer({
   name: 'counter',
   initialState: { count: 0, loading: false },
   reducers: {
@@ -25,7 +26,8 @@ export const counterState = createReducer({
 
 export const { increment, decrement, loading, asyncInc } = counterState.actions;
 
-on(increment, decrement)
+store
+  .on(increment, decrement)
   // .debounce(10)
   .effect((action, getData, dis) => {
     console.log(action, getData(), dis, '::::');

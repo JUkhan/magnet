@@ -1,4 +1,4 @@
-import { store } from '../src/store';
+import { store } from './store';
 import { TodoFilter } from './todoState';
 import { addTodo } from './todoState';
 import { increment, asyncInc, decrement } from './counterState';

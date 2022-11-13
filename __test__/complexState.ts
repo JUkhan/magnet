@@ -1,6 +1,6 @@
-import { createReducer, PayloadAction, on, Data } from '../src';
-
-export const complexState = createReducer({
+import { PayloadAction, Data } from '../src';
+import { store } from './store';
+export const complexState = store.createReducer({
   name: 'complex',
   initialState: { emp: {} as Data<number[]> },
   reducers: {},

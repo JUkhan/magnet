@@ -1,11 +1,12 @@
 import { useSyncExternalStore } from 'react';
-import { store } from './store';
-import { shallowEqual } from './utils/shallowEqual';
+import { shallowEqual } from '../utils/shallowEqual';
+import { useStore } from './useStore';
 
-export function useStore<T>(
+export function useSelector<T>(
   selector: (sate: any) => T = (state) => state as T,
   cache = false
 ) {
+  const store = useStore();
   let oldState: any = null;
   return useSyncExternalStore<T>(store.subscribe, () => {
     if (cache) {

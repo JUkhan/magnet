@@ -150,3 +150,36 @@ export interface TypedUseSelectorByActionsHook<TState> {
     equalityFn?: (left: TSelected, right: TSelected) => boolean
   ): TSelected;
 }
+export type Store<T extends Object = any> = {
+  getState: () => T;
+  dispose: () => void;
+  createAction<P = void, T extends string = string>(
+    type: string
+  ): ActionCreatorWithoutPayload<T> | ActionCreatorWithPayload<P, T>;
+  createReducer<
+    State,
+    CR extends ReducerMetods<State>,
+    M extends EffectHandlers,
+    Name extends string = string
+  >(
+    options: SliceOptions<State, CR, M, Name>
+  ): Slice<State, CR, M, Name>;
+  on(...actions: ActionFn[]): {
+    debounce(milliseconds: number): {
+      effect(handlerFn: EffectHandler2): {
+        unsubscribe: () => void;
+      };
+    };
+    effect(handlerFn: EffectHandler2): {
+      unsubscribe: () => void;
+    };
+  };
+  createEffect(
+    actions: ActionParam,
+    handlerFn: EffectHandler2
+  ): {
+    unsubscribe: () => void;
+  };
+  subscribe(fn: any): () => void;
+  __effectMap: Map<string, any>;
+};

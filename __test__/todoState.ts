@@ -1,12 +1,12 @@
-import { createReducer, PayloadAction } from '../src';
-
+import { PayloadAction } from '../src';
+import { store } from './store';
 export enum TodoFilter {
   SHOW_ALL = 'SHOW_ALL',
   SHOW_COMPLETED = 'SHOW_COMPLETED',
   SHOW_ACTIVE = 'SHOW_ACTIVE',
 }
 
-export const todoState = createReducer({
+export const todoState = store.createReducer({
   name: 'todos',
   initialState: [{ id: 1, text: 'Learn FP', completed: false }],
   reducers: {
@@ -31,7 +31,7 @@ export const todoState = createReducer({
 
 export const { addTodo, removeTodo, toggleTodo } = todoState.actions;
 
-export const todoFilterState = createReducer({
+export const todoFilterState = store.createReducer({
   name: 'todoFilter',
   initialState: TodoFilter.SHOW_ALL,
   reducers: {
