@@ -151,8 +151,9 @@ export interface TypedUseSelectorByActionsHook<TState> {
   ): TSelected;
 }
 export type Store<T extends Object = any> = {
+  dispatch(action: AnyAction): void;
   getState: () => T;
-  dispose: () => void;
+  //dispose: () => void;
   createAction<P = void, T extends string = string>(
     type: string
   ): ActionCreatorWithoutPayload<T> | ActionCreatorWithPayload<P, T>;
@@ -181,5 +182,6 @@ export type Store<T extends Object = any> = {
     unsubscribe: () => void;
   };
   subscribe(fn: any): () => void;
-  __effectMap: Map<string, any>;
+  ///__effectMap: Map<string, any>;
+  [key: string]: any;
 };

@@ -1,4 +1,4 @@
-import { createActionHelper } from './createAction';
+import { createAction } from './createAction';
 import { createReducer } from './createReducer';
 import { createEffectHelper, onHelper } from './effect';
 import { Store } from './typeHelper';
@@ -8,7 +8,7 @@ function createStoreHelper<T extends object = any>(initialState: T): Store<T> {
   let state = initialState;
   const reducers = new Map<string, (state: any, action: any) => any>();
   const effectMap = new Map<string, any>();
-  const obj: any = {
+  const obj = {
     setState(key: string, value: any) {
       state = { ...state, [key]: value };
       listenerList.forEach((listener) => listener(state));
@@ -38,12 +38,13 @@ function createStoreHelper<T extends object = any>(initialState: T): Store<T> {
     },
 
     dispose() {
-      effectMap.clear();
-      reducers.clear();
-      listenerList.clear();
+      // effectMap.clear();
+      // reducers.clear();
+      // listenerList.clear();
     },
+    createAction,
   };
-  obj.createAction = createActionHelper(obj.dispatch);
+
   return {
     getState: obj.getState,
     dispose: obj.dispose,
@@ -53,6 +54,7 @@ function createStoreHelper<T extends object = any>(initialState: T): Store<T> {
     createEffect: createEffectHelper(effectMap) as any,
     subscribe: obj.subscribe,
     __effectMap: effectMap,
+    dispatch: obj.dispatch,
   };
 }
 export function createStore<T extends object = any>() {

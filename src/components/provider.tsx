@@ -1,6 +1,6 @@
 import React from 'react';
 import { Store } from '../typeHelper';
-import { MagneticContext } from '../components/context';
+import { MagneticContext } from './context';
 import { useIsomorphicLayoutEffect } from '../utils/useIsomorphicLayoutEffect';
 
 interface StoreProps {

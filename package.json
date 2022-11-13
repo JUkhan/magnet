@@ -1,6 +1,6 @@
 {
   "name": "r-magnet",
-  "version": "1.0.0-dev1",
+  "version": "1.0.0-dev3",
   "description": "A state management library for React",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
