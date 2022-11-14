@@ -24,12 +24,11 @@ export function createEffectHelper(effectMap: Map<string, any>) {
    */
   return function createEffect(actions: ActionParam, handlerFn: EffectHandler) {
     let _actions: ActionFn[] = Array.isArray(actions) ? actions : [actions];
-    const sub = subscribeEffect(
+    return subscribeEffect(
       _actions.map((actionFn: any) => actionFn._$atype),
       handlerFn,
       effectMap
     );
-    return sub;
   };
 }
 export function onHelper(effectMap: Map<string, any>) {

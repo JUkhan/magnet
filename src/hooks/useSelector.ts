@@ -1,21 +1,23 @@
-import { useSyncExternalStore } from 'react';
+import { useState } from 'react';
 import { shallowEqual } from '../utils/shallowEqual';
+import { useIsomorphicLayoutEffect } from '../utils/useIsomorphicLayoutEffect';
 import { useStore } from './useStore';
 
-export function useSelector<T>(
+export function useSelector<T = any>(
   selector: (sate: any) => T = (state) => state as T,
-  cache = false
+  equalityFn: (left: T, right: T) => boolean = shallowEqual
 ) {
   const store = useStore();
+  const [state, setState] = useState(selector(store.getState()));
   let oldState: any = null;
-  return useSyncExternalStore<T>(store.subscribe, () => {
-    if (cache) {
-      const newState = selector(store.getState());
-      if (!shallowEqual(oldState, newState)) {
+  useIsomorphicLayoutEffect(() => {
+    return store.subscribe((mState) => {
+      const newState = selector(mState);
+      if (!equalityFn(newState, oldState)) {
+        setState(newState);
         oldState = newState;
       }
-      return oldState;
-    }
-    return selector(store.getState());
-  });
+    });
+  }, [store]);
+  return state;
 }

@@ -181,7 +181,7 @@ export type Store<T extends Object = any> = {
   ): {
     unsubscribe: () => void;
   };
-  subscribe(fn: any): () => void;
-  ///__effectMap: Map<string, any>;
+  subscribe(fn: (state: any, action: AnyAction) => void): () => void;
+
   [key: string]: any;
 };
