@@ -89,7 +89,7 @@ export function createReducer(store: any) {
     return {
       name: options.name,
       actions,
-      //reducer,
+      reducer,
     };
   };
 }

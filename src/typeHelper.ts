@@ -99,7 +99,7 @@ export interface Slice<
 > {
   name: Name;
   actions: ReducerActions<R> & EffectActions<M>;
-  //reducer: Reducer<State, AnyAction>;
+  reducer: Reducer<State, AnyAction>;
 }
 
 export type EffectHandler<A extends Action = AnyAction> = (
@@ -182,6 +182,10 @@ export type Store<T extends Object = any> = {
     unsubscribe: () => void;
   };
   subscribe(fn: (state: any, action: AnyAction) => void): () => void;
-
+  addReducer<T>(
+    name: string,
+    reduce: (state: T, action: AnyAction) => T,
+    initialState: T
+  ): void;
   [key: string]: any;
 };

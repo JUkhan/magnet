@@ -60,6 +60,7 @@ function createStoreHelper<T extends object = any>(initialState: T): Store<T> {
     subscribe: obj.subscribe,
     __effectMap: effectMap,
     dispatch: obj.dispatch,
+    addReducer: obj.addReducer,
   };
 }
 export function createStore<T extends object = any>() {
